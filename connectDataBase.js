@@ -1,5 +1,6 @@
 import connect from "./dataBase/connect.js"
-import { User } from "../../dataBase/models/User.js"
+import { User } from "./dataBase/models/User.js"
+import { Empresa } from "./dataBase/models/Empresa.js"
 
 const connectDataBase = async () => {
     try {
