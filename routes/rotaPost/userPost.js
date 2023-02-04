@@ -4,9 +4,9 @@ import { User } from "../../dataBase/models/User.js"
 export const userPost = express.Router()
 
 userPost.post('/cadastro', async (req, res) => {
-    const { name, age, phone, sexo } = req.body
+    const { active, idEmpresa, name, user, password, typeUser, activeWaBox, phone } = req.body
 
-    const existUser = await User.findOne({ where: { phone } }).catch(
+    const existUser = await User.findOne({ where: { user } }).catch(
         (err) => {
             console.log(err)
         }
@@ -15,10 +15,10 @@ userPost.post('/cadastro', async (req, res) => {
     if (existUser) {
         return res
             .status(409)
-            .json({ message: 'Phone já cadastrado no sistema' })
+            .json({ message: 'Nome de usuário já cadastrado no sistema' })
     }
 
-    const newUser = new User({ name, age, phone, sexo })
+    const newUser = new User({ active, idEmpresa, name, user, password, typeUser, activeWaBox, phone })
     const saveUser = await newUser.save().catch(
         (err) => {
             console.log(err)
