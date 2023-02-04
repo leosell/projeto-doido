@@ -11,26 +11,60 @@ const User = connect.define (
             primaryKey: true,
         },
 
+        active: {
+            type: sequelize.BOOLEAN,
+            allowNull: false
+        },
+
+        idEmpresa: {
+            type: sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'empresas',
+                key: 'id'
+            }
+        },
+
         name: {
             type: sequelize.STRING(150),
             allowNull: false,
         },
 
-        age: {
-            type: sequelize.INTEGER,
+        user: {
+            type: sequelize.STRING,
             allowNull: false,
+        },
+
+        password: {
+            type: sequelize.STRING,
+            allowNull: false
+        },
+
+        typeUser: {
+            type: sequelize.STRING,
+            allowNull: false,
+            validate: {
+                isIn: [[
+                    'Super',
+                    'Regional',
+                    'Comercial',
+                    'Parceiro (Master)',
+                    'Parceiro (Vendedor)',
+                    'Parceiro (Operacional'
+                ]]
+            }
+        },
+
+        activeWaBox: {
+            type: sequelize.BOOLEAN,
+            allowNull: true
         },
 
         phone: {
             type: sequelize.STRING(11),
-            allowNull: false,
-        },
-
-        sexo: {
-            type: sequelize.STRING(1),
-            allowNull: false,
+            allowNull: true,
         }
     }
 )
 
-export {User}
+export { User }
