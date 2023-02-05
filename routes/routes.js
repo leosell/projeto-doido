@@ -7,8 +7,11 @@ import { empresaPost } from "./rotaPost/empresaPost.js"
 import { empresaGet } from "./rotaGet/empresaGet.js"
 import { empresaDelete } from "./rotaDelete/empresaDelete.js"
 import { empresaUpdate } from "./rotaUpdate/empresaUpdate.js"
+import { loginPost } from "./rotaPost/loginPost.js"
 
 export const routes = express.Router()
+
+routes.use('/', loginPost)
 
 routes.use('/user', userPost)
 routes.use('/user/busca', userGet)

@@ -1,5 +1,6 @@
 import sequelize from "sequelize"
 import connect from "../connect.js"
+import bcrypt from "bcrypt"
 
 const User = connect.define (
     'user',
@@ -63,6 +64,24 @@ const User = connect.define (
         phone: {
             type: sequelize.STRING(11),
             allowNull: true,
+        }
+    },
+
+    {
+        hooks: {
+            beforeCreate: async (User) => {
+                if (User.password) {
+                    const salt = await bcrypt.genSaltSync(10, 'a')
+                    User.password = bcrypt.hashSync(User.password, salt)
+                }
+            },
+
+            beforeUpdate: async (User) => {
+                if (User.password) {
+                    const salt = await bcrypt.genSaltSync(10, 'a')
+                    User.password = bcrypt.hashSync(User.password, salt)
+                }
+            }
         }
     }
 )

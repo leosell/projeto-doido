@@ -12,7 +12,7 @@ const port = process.env.PORT || 5000
 
 server.listen(
     port,
-    console.log('server aberto')
+    console.log(`Servidor aberto. \nPorta do servidor é ${port}`)
 )
 
 server.use(cors());
