@@ -1,32 +1,24 @@
 import React, { useReducer } from "react"
 
-const inicialState = {
-    Loading: true,
-    isLogged: false,
-    update: false
+export const inicialState = {
+    isLogged: false
 }
 
-export const status = (state, action) => {
+const status = (state, action) => {
     switch (action.type) {
         case "login":
-            return { ...state, isLogged: action.payload, Loading: false }
+            return { ...state, isLogged: action.payload }
 
         case "logOut":
             localStorage.removeItem('token')
-            return { ...state, isLogged: false, Loading: false }
-
-        case "verify":
-            return { ...state, isLogged: true, Loading: false }
-
-        case "update":
-            return { ...state, update: action.payload }
+            return { ...state, isLogged: false }
 
         default:
             return state
     }
 }
 
-export const Context = React.createContext()
+export const Context = React.createContext(inicialState)
 
 export const Provider = ({ children }) => {
     const [ state, dispatch ] = useReducer(status, inicialState)

@@ -3,7 +3,7 @@ import { Empresa } from "../../dataBase/models/Empresa.js"
 
 export const empresaPost = express.Router()
 
-empresaPost.post('/cadastro', async (req, res) => {
+empresaPost.post('/', async (req, res) => {
     const { active, nameEmpresa, cnpj, codNova, regionalResponsavel, comercialResponsavel, email, phone, active3C, token3C } = req.body
 
     const existEmpresa = await Empresa.findOne({ where: { codNova } }).catch(

@@ -1,11 +1,14 @@
-import React, { useState } from "react"
-import API from "../../API/index.js"
+import React, { useContext, useState } from "react"
+import API from "../../API/index"
 import swal from "sweetalert2"
+import { Context, Provider } from "../../source/status"
 
 const Login = () => {
 
     const [ user, setUser ] = useState()
     const [ password, setPassword ] = useState()
+
+    const { dispatch } = useContext(Context, Provider)
 
     const loginPressed = async () => {
         console.log(user)
@@ -19,18 +22,25 @@ const Login = () => {
             console.log('depois de enviar para api')
             if (data.status === 200) {
                 await localStorage.setItem('token', data.data.token)
+                // dispatch({ type: 'login', payload: true })
                 swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
                     icon: 'success',
                     title: 'Sejá bem vindo',
-                    showConfirmButton: false,
-                    timer: 1500
                 })
             } else {
                 swal.fire({
+                    toast: true,
+                    position: 'top-end',
                     icon: 'error',
                     title: 'User/Password Invalid',
-                    showCancelButton: false,
-                    showConfirmButton: true
+                    showConfirmButton: false,
+                    timerProgressBar: true,
+                    timer: 3000
                 })
                 setUser('')
                 setPassword('')
@@ -38,23 +48,38 @@ const Login = () => {
         } catch (err) {
             console.log(err)
             swal.fire({
+                toast: true,
+                position: 'top-end',
                 icon: 'error',
                 title: 'User/Password Invalid',
-                showCancelButton: false,
-                showConfirmButton: true
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 3000
             })
         }
     }
 
     return (
-        <div className="">
-            <label>User</label>
-            <input type="text" value={user} onChange={ (e) => setUser(e.target.value) } />
+        <div className="bg-blue-400 w-screen h-screen flex justify-center items-center">
+            <div className="flex flex-col bg-red-400 h-96 w-3/4 justify-center items-center">
+                <label>User</label>
+                <input
+                    type="text"
+                    value={user}
+                    onChange={ (e) => setUser(e.target.value) }
+                    className="w-96 "    
+                />
 
-            <label>Password</label>
-            <input type="password" value={password} onChange={ (e) => setPassword(e.target.value) } />
+                <label>Password</label>
+                <input
+                    type="password"
+                    value={password}
+                    onChange={ (e) => setPassword(e.target.value) }
+                    className="w-96"    
+                />
 
-            <button onClick={loginPressed}>Login</button>
+                <button onClick={loginPressed}>Login</button>
+            </div>
         </div>
     )
 }

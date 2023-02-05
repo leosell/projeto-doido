@@ -3,7 +3,7 @@ import { User } from "../../dataBase/models/User.js"
 
 export const userPost = express.Router()
 
-userPost.post('/cadastro', async (req, res) => {
+userPost.post('/', async (req, res) => {
     const { active, idEmpresa, name, user, password, typeUser, activeWaBox, phone } = req.body
 
     const existUser = await User.findOne({ where: { user } }).catch(
