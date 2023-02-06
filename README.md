@@ -1,0 +1,2 @@
+<h1 align="center">Projeto Doido</h1>
+<p>Estou criando uma replica do sistema do meu trabalho, com backend em NODEjs pois o nosso é em JAVA e quero tentar realizar a melhoria em performance que precisamos, e tentar me desenvolver mais na programação</p>
