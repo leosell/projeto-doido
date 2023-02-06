@@ -3,7 +3,7 @@ import { User } from "../../dataBase/models/User.js"
 
 export const userGet = express.Router()
 
-userGet.get('/cadastros', async (req, res) => {
+userGet.get('/', async (req, res) => {
     const page = req.query.page || 1
     const limit = 10
     const offSet = (page - 1) * limit

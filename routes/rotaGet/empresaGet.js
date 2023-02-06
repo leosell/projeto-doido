@@ -3,7 +3,7 @@ import { Empresa } from "../../dataBase/models/Empresa.js"
 
 export const empresaGet = express.Router()
 
-empresaGet.get('/cadastros', async (req, res) => {
+empresaGet.get('/', async (req, res) => {
     const page = req.query.page || 1
     const limit = 10
     const offSet = (page - 1) * limit
