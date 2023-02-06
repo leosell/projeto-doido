@@ -1,18 +1,19 @@
 import React, { useContext, useState } from "react"
 import API from "../../API/index"
 import swal from "sweetalert2"
-import { Context, Provider } from "../../source/status"
+import { Context } from "../../source/status"
 
 const Login = () => {
 
     const [ user, setUser ] = useState()
     const [ password, setPassword ] = useState()
 
-    const { dispatch } = useContext(Context, Provider)
+    const { dispatch } = useContext(Context)
 
     const loginPressed = async () => {
         console.log(user)
         console.log(password)
+        console.log(dispatch)
         try {
             console.log('antes de enviar para api')
             const data = await API.post('/login', { 
@@ -32,6 +33,8 @@ const Login = () => {
                     icon: 'success',
                     title: 'Sejá bem vindo',
                 })
+                setUser('')
+                setPassword('')
             } else {
                 swal.fire({
                     toast: true,
@@ -61,7 +64,7 @@ const Login = () => {
 
     return (
         <div className="bg-blue-400 w-screen h-screen flex justify-center items-center">
-            <div className="flex flex-col bg-red-400 h-96 w-3/4 justify-center items-center">
+            <div className="flex flex-col bg-red-400 h-1/2 w-1/2 justify-center items-center">
                 <label>User</label>
                 <input
                     type="text"
