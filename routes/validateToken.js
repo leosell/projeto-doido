@@ -1,9 +1,12 @@
 import jwt from "jsonwebtoken"
+import dotenv from "dotenv"
 
 const checkToken = (token, res) => {
+    dotenv.config({ path: '../dataBase/config.env' })
+    const chave = process.env.CHAVE_CRIPTOGRAFICA
     jwt.verify(
         token,
-        process.env.CHAVE_CRIPTOGRAFICA,
+        chave,
         (err, data) => {
             if (err) {
                 return res
