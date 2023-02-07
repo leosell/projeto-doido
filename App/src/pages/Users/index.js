@@ -11,7 +11,6 @@ const Users = () => {
             const result = await API.get('/user/busca')
             console.log(result.data)
             setUser(result.data)
-            console.log(result.data)
         }
         userGet()
     }, [])
