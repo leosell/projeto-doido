@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert2"
 import API from "../../API";
 
 const Empresas = () => {
 
     const [ empresa, setEmpresa ] = useState([])
+    const navigate = useNavigate()
 
     useEffect( () => {
         const empresaGet = async () => {
@@ -17,7 +19,12 @@ const Empresas = () => {
 
     return (
         <div>
-            <label>Filtrar por Nome ou Código Nova</label>
+            <button onClick={() => {
+                navigate('/users')
+            }}>
+                Usuários
+            </button>
+            <h1>Filtrar por Nome ou Código Nova</h1>
             <input
                 type="text"
                 // onBlur={(event) => {
