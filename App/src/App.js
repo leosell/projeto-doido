@@ -7,6 +7,8 @@ import Login from "./pages/Login"
 import Users from "./pages/Users/index"
 import Empresas from "./pages/Empresas/index"
 
+import { Provider } from "./source/status"
+
 const App = () => {
 
     // const { state = inicialState } = useContext(Context)
@@ -38,4 +40,10 @@ const App = () => {
     )
 }
 
-export default App
+export default () => {
+    return (
+        <Provider>
+          <App />
+        </Provider>
+    );
+  };
