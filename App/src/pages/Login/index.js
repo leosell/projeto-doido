@@ -9,21 +9,15 @@ const Login = () => {
     const [ user, setUser ] = useState()
     const [ password, setPassword ] = useState()
 
-    const { state, dispatch } = useContext(Context)
+    const { dispatch } = useContext(Context)
     const navigate = useNavigate()
 
     const loginPressed = async () => {
-        
-        console.log(user)
-        console.log(password)
-        console.log(dispatch)
         try {
-            console.log('antes de enviar para api')
             const data = await API.post('/login', { 
                 user: user,
                 password: password 
             })
-            console.log('depois de enviar para api')
             setTimeout(() => {
                 if (data.status === 200) {
                     localStorage.setItem('token', data.data.token)
@@ -53,7 +47,7 @@ const Login = () => {
                     setUser('')
                     setPassword('')
                 }
-            }, 2000);
+            }, 1000);
         } catch (err) {
             console.log(err)
             swal.fire({
