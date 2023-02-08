@@ -15,7 +15,7 @@ empresaGet.get('/', async (req, res) => {
     if (codNova) {
         return res
             .status(200)
-            .json({ codNova })
+            .json(codNova)
     } else {
         return res.send({ message: 'Empresa não cadastada' })
     }
