@@ -1,13 +1,14 @@
 import React, { useReducer } from "react"
 
 export const inicialState = {
-    isLogged: false
+    isLogged: false,
+    loading: false
 }
 
 const status = (state, action) => {
     switch (action.type) {
         case "login":
-            return { ...state, isLogged: action.payload }
+            return { ...state, loading: action.payload, isLogged: action.payload }
 
         case "logOut":
             localStorage.removeItem('token')
