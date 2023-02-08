@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import API from "../../API"
 import swal from "sweetalert2"
+import { Context } from "../../source/status"
 
 const Users = () => {
 
     const [ user, setUser ] = useState([])
+    const { state, dispatch } = useContext(Context)
 
     useEffect(() => {
+        console.log(state.isLogged)
         const userGet = async () => {
             const result = await API.get('/user/busca')
             console.log(result.data)
