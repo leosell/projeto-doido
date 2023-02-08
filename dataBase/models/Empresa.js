@@ -28,7 +28,7 @@ export const Empresa = connect.define(
         },
 
         codNova: {
-            type: sequelize.INTEGER,
+            type: sequelize.STRING(4),
             allowNull: false,
             unique: true
         },
