@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react"
-import API from "../../API/index"
 import swal from "sweetalert2"
+import { useNavigate } from "react-router-dom"
+import API from "../../API/index"
 import { Context } from "../../source/status"
 
 const Login = () => {
@@ -8,9 +9,11 @@ const Login = () => {
     const [ user, setUser ] = useState()
     const [ password, setPassword ] = useState()
 
-    const { dispatch } = useContext(Context)
+    const { state, dispatch } = useContext(Context)
+    const navigate = useNavigate()
 
     const loginPressed = async () => {
+        
         console.log(user)
         console.log(password)
         console.log(dispatch)
@@ -21,33 +24,36 @@ const Login = () => {
                 password: password 
             })
             console.log('depois de enviar para api')
-            if (data.status === 200) {
-                await localStorage.setItem('token', data.data.token)
-                // dispatch({ type: 'login', payload: true })
-                swal.fire({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    icon: 'success',
-                    title: 'Sejá bem vindo',
-                })
-                setUser('')
-                setPassword('')
-            } else {
-                swal.fire({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'error',
-                    title: 'User/Password Invalid',
-                    showConfirmButton: false,
-                    timerProgressBar: true,
-                    timer: 3000
-                })
-                setUser('')
-                setPassword('')
-            }
+            setTimeout(() => {
+                if (data.status === 200) {
+                    localStorage.setItem('token', data.data.token)
+                    dispatch({ type: 'login', payload: true })
+                    navigate('/users')
+                    swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        icon: 'success',
+                        title: 'Sejá bem vindo',
+                    })
+                    setUser('')
+                    setPassword('')
+                } else {
+                    swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'User/Password Invalid',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 3000
+                    })
+                    setUser('')
+                    setPassword('')
+                }
+            }, 2000);
         } catch (err) {
             console.log(err)
             swal.fire({
@@ -81,7 +87,7 @@ const Login = () => {
                     className="w-96"    
                 />
 
-                <button onClick={loginPressed}>Login</button>
+                <button onClick={() => loginPressed()}>Login</button>
             </div>
         </div>
     )
