@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import API from "../../API"
 import swal from "sweetalert2"
-import { Context } from "../../source/status"
+import { useNavigate } from "react-router-dom"
 
 const Users = () => {
 
     const [ user, setUser ] = useState([])
-    const { state, dispatch } = useContext(Context)
+    const navigate = useNavigate()
 
     useEffect(() => {
-        console.log(state.isLogged)
         const userGet = async () => {
             const result = await API.get('/user/busca')
             console.log(result.data)
@@ -20,6 +19,11 @@ const Users = () => {
 
     return (
         <div>
+            <button onClick={() => {
+                navigate('/empresas')
+            }}>
+                Empresas
+            </button>
             <h1>Users</h1>
             <label>Filtrar por Nome e Usuário</label>
             <input
